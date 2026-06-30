@@ -1,9 +1,10 @@
-//code to find duplicate in array
+//code to find maximum frequecy element
 #include <stdio.h>
 
 int main()
 {
-    int a[100], n, i, j, found;
+    int a[100], n, i, j;
+    int maxCount = 0, maxElement;
 
     printf("Enter the number of elements: ");
     scanf("%d", &n);
@@ -14,35 +15,36 @@ int main()
         scanf("%d", &a[i]);
     }
 
-    printf("Duplicate elements are:\n");
-
     for(i = 0; i < n; i++)
     {
-        found = 0;
+        int count = 1;
 
-        // Check if element is already printed
+        // Skip if element is already counted
         for(j = 0; j < i; j++)
         {
             if(a[i] == a[j])
-            {
-                found = 1;
                 break;
-            }
         }
 
-        if(found == 1)
+        if(j != i)
             continue;
 
-        // Check for duplicates
+        // Count frequency
         for(j = i + 1; j < n; j++)
         {
             if(a[i] == a[j])
-            {
-                printf("%d\n", a[i]);
-                break;
-            }
+                count++;
+        }
+
+        if(count > maxCount)
+        {
+            maxCount = count;
+            maxElement = a[i];
         }
     }
+
+    printf("Element with maximum frequency = %d\n", maxElement);
+    printf("Frequency = %d\n", maxCount);
 
     return 0;
 }
